@@ -3,31 +3,477 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="../app-estacion/static/css/detalle.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/detalle.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 	<title>detalle</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://kit.fontawesome.com/2eb80ea257.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	
 	<div id="chipid" style="display: none;">{{CHIPID}}</div>
-	<div class="todo">
+	<!-- <div class="todo">
 		<div id="botones">
 			
-				<div class="clima-apodo">
+				<div class="fecha">
 					
 				</div>
 
-				<div class="clima-ubicacion">
+				<div class="ubicacion">
 					
 				</div>
-				<!-- 
-				<div class="clima-visitas">
-					
-				</div> -->
 
 		</div>
-	</div>
+		<div id="grafico-container">
+			<canvas id="grafico-estacion" style="width: 100%; height: 100%;"></canvas>
+		</div>
 
-		
+	</div> -->
+
+
+ 	<div id="wrapper">
+
+
+ 		<div id="container">
+
+ 		
+ 			<div id="panel">
+		 		
+		 	
+	 			<div id="menu">
+					<a href="https://mattprofe.com.ar/alumno/11991/app-estacion/panel">
+		 				<i class="fas fa-chevron-left"></i>
+		 			</a>
+		 		</div>
+
+ 				<div id="panel-container">
+ 					<div id="panel-title">
+	 					<div id="col-sub">
+							<div id="fecha">
+							</div>
+
+							<div id="hora">
+							</div>
+	 					</div>
+
+	 					<div id="title-ubicacion">
+	 						
+	 						<span id="ubicacion">---</span>
+	 					</div>
+
+	 					<div id="title-sub" style="display: none;">
+	 						<i class="material-icons-outlined">thermostat</i>&nbspTEMPERATURA
+	 					</div>  
+	 				</div>
+
+	 				<div id="panel-container-temperatura">
+
+	 					<div class="panel-col">
+
+	 						<div class="col-items">
+	 							
+	 							<div class="item">
+	 								<div class="item-title">
+	 									<i class="material-icons-outlined">thermostat</i>&nbspTEMPERATURA
+	 								</div>
+	 							</div>
+
+	 						</div>
+	 						
+
+	 						<div class="col-items">
+
+	 							<div class="col-important">
+		 							<div class="important-val-int" id="temp-val-int">
+		 								--
+		 							</div>
+
+									<div class="important-detail">
+		 								
+										<div class="important-val-unit">
+		 								ºC
+		 								</div>
+
+		 								<div class="important-val-dec" id="temp-val-dec">
+		 								--
+		 								</div>
+
+		 							</div> 							
+		 						</div>
+
+			 					<div class="panel-row">
+		 							<div class="item">
+		 								<div class="item-title">
+		 									Máxima
+		 								</div>
+		 								<div class="item-value" id="temp-max">
+		 									--ºC
+		 								</div>
+		 							</div>
+
+		 							<div class="item">
+		 								<div class="item-title">
+		 									Mínima
+		 								</div>
+		 								<div class="item-value" id="temp-min">
+		 									--ºC
+		 								</div>
+		 							</div>
+
+		 						</div>
+
+	 						</div>
+
+	 					</div>
+
+	 					<div class="panel-col">
+	 						
+
+	 						<div class="col-items">
+	 							
+	 							<div class="item">
+	 								<div class="item-title">
+	 									Sensación
+	 								</div>
+	 							</div>
+
+	 						</div>
+
+
+	 						<div class="col-items">
+	 							<div class="col-important">
+		 							<div class="important-val-int" id="sens-val-int">
+		 								--
+		 							</div>
+
+									<div class="important-detail">
+		 								
+										<div class="important-val-unit">
+		 								ºC
+		 								</div>
+
+		 								<div class="important-val-dec" id="sens-val-dec">
+		 								--
+		 								</div>
+
+		 							</div> 							
+		 						</div>
+
+		 						<div class="panel-row">
+			 						<div class="item">
+		 								<div class="item-title">
+		 									Máxima
+		 								</div>
+		 								<div class="item-value" id="sen-max">
+		 									--ºC
+		 								</div>
+		 							</div>
+
+		 							<div class="item">
+		 								<div class="item-title">
+		 									Mínima
+		 								</div>
+		 								<div class="item-value" id="sen-min">
+		 									--ºC
+		 								</div>
+		 							</div>
+		 						</div>
+		 					</div>
+		 					
+	 					</div>
+ 					</div>
+
+ 					<div id="panel-container-fuego">
+
+	 					<div class="panel-col">
+
+	 						<div class="col-items">
+	 			
+	 							<div class="item">
+	 								<div class="item-title">
+	 									FFMC
+	 								</div>
+	 								<div class="item-value" id="ffmc">
+	 									--
+	 								</div>
+	 							</div>
+
+	 							<div class="item">
+	 								<div class="item-title">
+	 									DMC
+	 								</div>
+	 								<div class="item-value" id="dmc">
+	 									--
+	 								</div>
+	 							</div>
+
+	 							<div class="item">
+	 								<div class="item-title">
+	 									DC
+	 								</div>
+	 								<div class="item-value" id="dc">
+	 									--
+	 								</div>
+	 							</div>
+
+	 						</div>
+	 					</div>
+
+	 					<div class="panel-col">
+
+	 						<div class="col-items">
+	 							
+	 							<div class="item">
+	 								<div class="item-title">
+	 									ISI
+	 								</div>
+	 								<div class="item-value" id="isi">
+	 									--
+	 								</div>
+	 							</div>
+
+	 							<div class="item">
+	 								<div class="item-title">
+	 									BUI
+	 								</div>
+	 								<div class="item-value" id="bui">
+	 									--
+	 								</div>
+	 							</div>
+
+	 							<div class="item">
+	 								<div class="item-title">
+	 									FWI
+	 								</div>
+	 								<div class="item-value" id="fwi">
+	 									--
+	 								</div>
+	 							</div>
+	 							
+
+	 						</div>
+
+	 					</div>
+	 				</div>
+
+	 				<div id="panel-container-humedad">
+	 					<div class="panel-col">
+	 						<div class="col-items">
+
+	 							<div class="col-important">
+		 							<div class="important-val-int" id="humedad__val__int">
+		 								--
+		 							</div>
+
+									<div class="important-detail">
+		 								
+										<div class="important-val-unit">
+		 								%
+		 								</div>
+
+		 								<div class="important-val-dec" id="humedad__val__dec">
+		 								--
+		 								</div>
+		 								
+		 							</div> 							
+		 						</div>
+
+	 						</div>
+	 					</div>					
+	 				</div>
+
+	 				<div id="panel-container-viento">
+	 					<div class="panel-col">
+
+	 						<div class="col-items">
+	 							
+	 							<div class="item">
+	 								<div class="item-title"><i class="material-icons-outlined">air</i>
+	 									VIENTO
+	 								</div>
+	 							</div>
+	 						</div>
+	 						
+
+	 						<div class="col-items">
+
+	 							
+
+	 							<div class="col-important">
+		 							<div class="important-val-int" id="viento__val__int">
+		 								--
+		 							</div>
+
+									<div class="important-detail">
+		 								
+										<div class="important-val-unit">
+		 								Km/H
+		 								</div>
+
+		 								<div class="important-val-dec" id="viento__val__dec">
+		 								--
+		 								</div>
+		 								
+		 							</div> 							
+		 						</div>
+
+		 						
+
+			 					<div class="panel-row">
+		 							<div class="item">
+		 								<div class="item-title">
+		 									<i class="fas fa-caret-up color-rojo"></i>&nbspMáximo
+		 								</div>
+		 								<div class="item-value" id="viento__max">
+		 									--Km/H
+		 								</div>
+		 							</div>
+								</div>
+
+	 						</div>
+
+	 					</div>
+
+	 					<div class="panel-col">
+							<div class="panel-row">
+								<div style="display: flex; align-items: center; gap:5px; font-size: 18px;">
+
+									<i class="far fa-compass color-rojo"></i>	
+									<div class="" id="viento__val__veleta">
+									--
+									</div>
+
+
+								</div>
+							</div>
+	 					</div>
+	 				</div>
+	 				<!-- Fin Sección de datos de viento -->
+
+	 				<!-- Inicia Sección de datos de presion -->
+	 				<div id="panel-container-presion">
+	 					<div class="panel-col">
+	 						<div class="col-items">
+
+	 							<div class="col-important">
+		 							<div class="important-val-int" id="presion__val__int">
+		 								--
+		 							</div>
+
+									<div class="important-detail">
+		 								
+										<div class="important-val-unit">
+		 								hPa
+		 								</div>
+
+		 								<div class="important-val-dec" id="presion__val__dec">
+		 								--
+		 								</div>
+		 								
+		 							</div> 							
+		 						</div>
+
+	 						</div>
+	 					</div>				
+	 				</div>
+
+ 				</div>
+ 
+
+ 
+ 				<div id="panel-canvas">
+ 					<div id="contenedor-grafico" class="chart-container" style="position: relative; height: 100%; width: 100%; padding: 0.5em;">	
+
+						<canvas id="myChart"></canvas>
+					</div>
+ 				</div>
+ 		
+
+ 			</div>
+ 
+
+ 		</div>
+
+ 		<div id="controls">
+ 			
+ 			<!-- Botón temperatura -->
+ 			<div class="btn-control" id="btn-temperatura">
+ 				<div class="btn-control-container">
+ 					<div class="control-title">
+ 						<i class="fas fa-thermometer-full color-temperatura"></i>
+ 					</div>	
+ 
+ 					<div id="temp" class="control-date">
+ 						--ºC
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<!-- Fin botón temperatura -->
+
+ 			<!-- Botón fuego -->
+ 			<div class="btn-control" id="btn-fuego">
+ 				<div class="btn-control-container">
+ 					<div class="control-title">
+ 						<i class="fas fa-fire color-fuego"></i>
+ 					</div>	
+ 				
+ 					<div id="fuego" class="control-date"><i class="material-icons-outlined">thermostat</i>
+                    ?
+                </div>
+ 				</div>
+ 			</div>
+ 			<!-- Fin botón fuego -->
+
+ 			<!-- Botón humedad -->
+ 			<div class="btn-control" id="btn-humedad">
+ 				<div class="btn-control-container">
+ 					<div class="control-title">
+ 						<i class="fas fa-tint color-humedad"></i>
+ 					</div>	
+
+ 					<div id="humedad" class="control-date">
+ 						--%
+ 					</div>
+ 				</div>
+ 			</div>
+
+ 			<div class="btn-control" id="btn-presion">
+ 				<div class="btn-control-container">
+ 					<div class="control-title">
+ 						
+ 						<i class="fas fa-arrow-circle-down color-presion"></i>
+ 						
+ 					</div>	
+ 				
+ 					<div id="presion" class="control-date">
+ 						--hPa
+ 					</div>
+ 				</div>
+ 			</div>
+
+
+ 			<div class="btn-control" id="btn-viento">
+ 				<div class="btn-control-container">
+ 					<div class="control-title">
+ 						<i class="fas fa-wind color-viento"></i>
+ 					</div>	
+ 					<div id="viento" class="control-date">
+ 						--Km/H
+ 					</div>
+
+ 					<i class="visible far fa-compass color-rojo align-center"></i>	
+ 					<div id="viento__direccion">
+ 						--
+ 					</div>
+ 				</div>
+ 			</div>
+
+ 		</div>
+
+ 	</div>
+ 
+
 
 
 <script type="text/javascript" src="../js/detallesClima.js"></script>

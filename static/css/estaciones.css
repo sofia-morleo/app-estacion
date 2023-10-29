@@ -72,3 +72,6 @@
 	width: 400px;
 	padding: 20px;
 }
+@media screen and (max-width:500px) {
+	.btn-clima{width: 70%;}
+}
