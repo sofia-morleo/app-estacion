@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../app-estacion/static/css/css.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Login</title>
+</head>
+<body>
+
+    <h1>Bienvenido al login</h1>
+    
+    <form action="" method="POST">
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Ingrese su email" required>
+    
+        <label>Contraseña:</label>
+        <input type="password" name="pass" placeholder="Ingrese su pass" required>
+        
+        <label><a href="{{URL_WEB}}app-estacion/recovery">¿Olvidaste tu contraseña?</a></label>
+        
+        <input type="submit" name="btn_submit" value="Acceder" id="btnSubmit">
+    </form>
+    
+    <a href="{{URL_WEB}}app-estacion/register">¿No tienes una cuenta? Registrarse</a>
+    
+    <p>{{MSG}}</p>
+    
+
+</body>
+</html>
